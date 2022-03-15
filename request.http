@@ -1,0 +1,14 @@
+GET http://localhost:3000/
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "body": {
+    "name": "Тестовый пользователь",
+    "about": "Информация о себе",
+    "avatar": "https://sun3-13.userapi.com/impf/kP4Q9IS-6HCXIySzzudS3RSAbUFUVoVNKHSdOg/YuI0fNHgA0E.jpg?size=1204x538&quality=95&sign=b95b05b5b187de47ecba2725dd9c55b4&type=album.jpg"
+  }
+}
