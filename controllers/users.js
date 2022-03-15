@@ -21,8 +21,7 @@ export const findUser = (req, res) => {
         res.status(ERR_BAD_REQUEST).send({
           message: 'Переданы некорректные данные в методы создания пользователя',
         });
-      }
-      if (err.message === 'NotFound') {
+      } else if (err.message === 'NotFound') {
         res.status(ERR_NOT_FOUND).send({
           message: 'Запрашиваемый пользователь не найден',
         });

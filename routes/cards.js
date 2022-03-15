@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   getCards,
   createCard,
-  deleteUser,
+  deleteCard,
   likeCard,
   dislikeCard,
 } from '../controllers/cards.js';
@@ -13,7 +13,7 @@ cardRouter.get('/cards', getCards);
 
 cardRouter.post('/cards', createCard);
 
-cardRouter.delete('/cards/:cardId', deleteUser);
+cardRouter.delete('/cards/:cardId', deleteCard);
 
 cardRouter.put('/cards/:cardId/likes', likeCard);
 

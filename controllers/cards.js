@@ -25,7 +25,7 @@ export const createCard = (req, res) => {
     });
 };
 
-export const deleteUser = (req, res) => {
+export const deleteCard = (req, res) => {
   card.findByIdAndDelete(req.params.cardId)
     .orFail(() => {
       throw new Error('NotFound');
