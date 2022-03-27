@@ -2,7 +2,7 @@
   "name": "express-mesto-gha",
   "version": "1.0.0",
   "description": "[![Tests](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-13-sprint.yml) [![Tests](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-14-sprint.yml) # Проект Mesto фронтенд + бэкенд",
-  "main": "index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "start": "node app.js",
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/YZavyalova/express-mesto-gha.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "YGladkikh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/YZavyalova/express-mesto-gha/issues"

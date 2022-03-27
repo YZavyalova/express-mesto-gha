@@ -6,7 +6,7 @@ import ErrorConflict from '../errors/ErrorConflict.js';
 import ErrorNotFound from '../errors/ErrorNotFound.js';
 
 const SALT_ROUNDS = 10;
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'JWT_SECRET' } = process.env;
 
 export const getUsers = (req, res, next) => {
   User.find({})
@@ -35,7 +35,13 @@ export const findUser = (req, res, next) => {
 };
 
 export const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name,
+    about,
+    avatar,
+    email,
+    password,
+  } = req.body;
 
   User.findOne({ email })
     .then((user) => {
@@ -44,7 +50,13 @@ export const createUser = (req, res, next) => {
       }
       return bcrypt.hash(password, SALT_ROUNDS);
     })
-    .then((hash) => User.create({ name, about, avatar, email, password: hash }))
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => User.findOne({ _id: user._id }))
     .then((user) => res.send({ user }))
     .catch(next);

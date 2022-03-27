@@ -2,8 +2,6 @@
   "extends": "airbnb-base",
   "rules": {
     "no-underscore-dangle": ["error",{"allow":["_id"]}],
-    "no-console": 0,
-    "import/extensions": 0,
-    "object-curly-newline": 0
+    "import/extensions": 0 // я без этого правила не смогу делать импорты как в ES6
   }
 }

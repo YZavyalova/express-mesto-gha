@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
+import { errors } from 'celebrate';
 import errorHandler from './errors/errorHandler.js';
 import { login, createUser } from './controllers/users.js';
 import { validateRegister } from './middlewares/validation.js';
@@ -42,8 +43,10 @@ app.use(() => {
   throw new ErrorNotFound('Страница не найдена');
 });
 
+app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}...`);
 });

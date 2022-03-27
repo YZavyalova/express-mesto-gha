@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import Forbidden from '../errors/Forbidden.js';
+import Unauthorized from '../errors/Unauthorized.js';
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'JWT_SECRET' } = process.env;
 
 const auth = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    return next(new Forbidden('Необходима авторизация'));
+    return next(new Unauthorized('Необходима авторизация'));
   }
 
   req.user = payload;

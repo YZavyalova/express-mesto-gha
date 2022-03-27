@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import validator from 'validator';
 import Unauthorized from '../errors/Unauthorized.js';
 
 const userSchema = new mongoose.Schema({
@@ -23,11 +24,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: validator.isEmail,
+      message: (props) => `${props.value} is not a valid email`,
+    },
   },
   password: {
     type: String,
     required: true,
-    minlength: 8,
     select: false,
   },
 });

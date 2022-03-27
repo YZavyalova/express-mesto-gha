@@ -39,7 +39,7 @@ export const deleteCard = (req, res, next) => {
 
 export const likeCard = (req, res, next) => {
   cardModel.findByIdAndUpdate(
-    req.params.cardId,
+    req.params.id,
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
@@ -50,7 +50,7 @@ export const likeCard = (req, res, next) => {
 
 export const dislikeCard = (req, res, next) => {
   cardModel.findByIdAndUpdate(
-    req.params.cardId,
+    req.params.id,
     { $pull: { likes: req.user._id } },
     { new: true },
   )

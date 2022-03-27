@@ -62,7 +62,7 @@ export const validateCard = celebrate({
 });
 
 export const validateId = celebrate({
-  [Segments.BODY]: Joi.object().keys({
+  [Segments.PARAMS]: Joi.object().keys({
     id: Joi.string().length(24).hex().required()
       .messages({
         'any.required': 'id не может быть пустым',
