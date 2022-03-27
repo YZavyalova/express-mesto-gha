@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -17,7 +18,6 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
-
 app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());

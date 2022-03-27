@@ -6,7 +6,7 @@ import ErrorConflict from '../errors/ErrorConflict.js';
 import ErrorNotFound from '../errors/ErrorNotFound.js';
 
 const SALT_ROUNDS = 10;
-const JWT_SECRET = 'JWT_SECRET';
+const { JWT_SECRET } = process.env;
 
 export const getUsers = (req, res, next) => {
   User.find({})
