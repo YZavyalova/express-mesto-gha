@@ -1,29 +1,48 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import { rateLimit } from 'express-rate-limit';
+import errorHandler from './errors/errorHandler.js';
+import { login, createUser } from './controllers/users.js';
+import { validateRegister } from './middlewares/validation.js';
 import usersRouter from './routes/users.js';
-import cardsRouter from './routes/cards.js';
+import cardRouter from './routes/cards.js';
+import auth from './middlewares/auth.js';
+import ErrorNotFound from './errors/ErrorNotFound.js';
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(bodyParser.json()); // для собирания JSON-формата
-app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
-
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
-// мидлвеар
-app.use((req, res, next) => {
-  req.user = {
-    _id: '6230cd0373fd793c915c654f', // вставьте сюда _id созданного в предыдущем пункте пользователя
-  };
-  next();
+app.use(helmet());
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
 });
 
-app.use(usersRouter);
-app.use(cardsRouter);
-app.use((req, res) => res.status(404).send({ message: 'Страница не найдена' }));
+app.use(limiter);
+
+// роуты, не требующие авторизации,
+app.post('/signup', validateRegister, createUser);
+app.post('/signin', validateRegister, login);
+
+app.use(auth);
+
+app.use('/', usersRouter);
+app.use('/', cardRouter);
+
+app.use(() => {
+  throw new ErrorNotFound('Страница не найдена');
+});
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}...`);
